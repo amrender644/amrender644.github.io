@@ -576,6 +576,10 @@ function initForm() {
           const body = await res.json();
           if (Array.isArray(body.errors) && body.errors[0]) {
             msg = String(body.errors[0].message || '').slice(0, 80) || msg;
+          } else if (body.error) {
+            msg = String(body.error).slice(0, 80);
+          } else if (body.message) {
+            msg = String(body.message).slice(0, 80);
           }
         } catch {}
         setState(msg, 'rgba(251,191,36,.8)', false);
